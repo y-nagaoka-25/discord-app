@@ -1,0 +1,16 @@
+.message {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    color: #fff;
+
+    .messageInfo {
+        padding: 10px 10px 10px 20px;
+    }
+
+    .messageTimestamp {
+        color: #7b7c85;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+}
