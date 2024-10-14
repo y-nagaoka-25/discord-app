@@ -1,0 +1,90 @@
+.sidebar {
+    display: flex;
+    flex: 0.35;
+    height: 100vh;
+    background: #2D3035; // memo: あとでHomeに適用
+    &Left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #1E1F22;
+        padding: 15px 15px 7px;
+        .serverIcon {
+            position: relative;
+            border-radius: 50%;
+            background: #303338;
+            --width: 60px;
+            width: var(--width);
+            height: var(--width);
+            margin-bottom: 10px;
+            img {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: calc(var(--width) - 10px);
+            }
+        }
+    }
+    &Right {
+        background: #2A2D31;
+        position: relative;
+        width: 300px;
+        .sidebarTop {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .sidebarChannels {
+            padding: 13px;
+            .sidebarChannelsHeader {
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 5px;
+                .sidebarHeader {
+                    display: flex;
+                }
+                .sidebarAddIcon {
+                    cursor: pointer;
+                }
+            }
+        }
+        .sidebarFooter {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0;
+            border-top: 1px solid #686a6e;
+            .sidebarAccount {
+                display: flex;
+                align-items: center;
+                img {
+                    width: 60px;
+                }
+                .accountName {
+                    margin-left: 5px;
+                    h4 {
+                        color: #fff;
+                        font-weight: 500;
+                    }
+                    span {
+                        color: #686a6e;
+                    }
+                }
+            }
+            .sidebarVoice {
+                display: flex;
+                align-items: center;
+                color: #686a6e;
+            }
+        }
+    }
+}
