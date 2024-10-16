@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
@@ -6,11 +6,33 @@ import SidebarChannel from './SidebarChannel';
 import MicIcon from '@mui/icons-material/Mic';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
+import { onSnapshot, collection, query, DocumentData, addDoc } from 'firebase/firestore'
+import useCollection from '../../hooks/useCollection';
+
+interface Channel {
+    id: string;
+    channel: DocumentData;
+}
 
 const Sidebar = () => {
-    const currentUser = useAppSelector(state => state.user);
+    const currentUser = useAppSelector(state => state.user.user);
+
+    const { documents: channels } = useCollection('channels');
+
+    const addChannel = async () => {
+        let channelName: string | null = prompt('新しいチャンネルを作成します');
+
+        if (channelName) {
+            await addDoc(
+                collection(db, 'channels'),
+                {
+                    channelName
+                }
+            )
+        }
+    }
 
     return (
         <div className='sidebar'>
@@ -36,19 +58,17 @@ const Sidebar = () => {
                             <ExpandMoreIcon />
                             <h4>プログラミングちゃんねる</h4>
                         </div>
-                        <AddIcon className='sidebarAddIcon' />
+                        <AddIcon className='sidebarAddIcon' onClick={addChannel} />
                     </div>
                     <div className='sidebarChannelList'>
-                        <SidebarChannel />
-                        <SidebarChannel />
-                        <SidebarChannel />
+                        {channels.map(channel => <SidebarChannel key={channel.id} channel={channel.channel} id={channel.id} />)}
                     </div>
                     <div className='sidebarFooter'>
                         <div className='sidebarAccount'>
                             <img src={currentUser?.photo} alt="プロフィールアイコン" onClick={() => auth.signOut()} />
                             <div className='accountName'>
                                 <h4>{currentUser?.displayName}</h4>
-                                <span>#{currentUser?.uid.substring(0,6)}</span>
+                                <span>#{currentUser?.uid.substring(0, 6)}</span>
                             </div>
                         </div>
                         <div className='sidebarVoice'>
