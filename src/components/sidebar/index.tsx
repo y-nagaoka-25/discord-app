@@ -65,7 +65,15 @@ const Sidebar = () => {
                     </div>
                     <div className='sidebarFooter'>
                         <div className='sidebarAccount'>
-                            <img src={currentUser?.photo} alt="プロフィールアイコン" onClick={() => auth.signOut()} />
+                            <img
+                                src={currentUser?.photo}
+                                alt="プロフィールアイコン"
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => {
+                                    if (window.confirm("ログアウトしますか？")) {
+                                        auth.signOut()
+                                    }
+                                }} />
                             <div className='accountName'>
                                 <h4>{currentUser?.displayName}</h4>
                                 <span>#{currentUser?.uid.substring(0, 6)}</span>

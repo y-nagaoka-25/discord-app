@@ -19,14 +19,16 @@ type Props = {
 const ChatMessage = (props: Props) => {
     const { message } = props;
     const user = message.user;
+    console.log(user?.photo, user);
     return (
         <div className='message'>
-            {user.photo ? (
-                <img src={user.photo} alt="" style={{ borderRadius: '50%', width: 60 }} />
+            {user?.photo ? (
+                // <img src={user?.photo} alt="" style={{ borderRadius: '50%', width: 60 }} />
+                <Avatar />
             ) : <Avatar />}
             <div className="messageInfo">
                 <h4>
-                    {user?.displayName}
+                    {user?.displayName ?? 'no name'}
                     <span className='messageTimestamp'>{new Date(message.timestamp?.toDate()).toLocaleString()}</span>
                 </h4>
                 <p>{message.message}</p>

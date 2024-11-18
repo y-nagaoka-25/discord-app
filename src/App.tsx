@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged(loginUser => {
-      // console.log(loginUser);
       if (loginUser) {
         dispatch(
           login({
@@ -31,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      {currentUser ? (
+      {currentUser.user !== null ? (
         <>
           <Sidebar />
           <Chat />
