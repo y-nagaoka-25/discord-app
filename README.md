@@ -1,3 +1,10 @@
+## 実行
+
+```
+npm install
+npm run dev
+```
+
 ## 使用技術
 
 - React
